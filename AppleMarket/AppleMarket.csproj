@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppleOrchardDataSet.cs">
+      <DependentUpon>AppleOrchardDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="AppleOrchardDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

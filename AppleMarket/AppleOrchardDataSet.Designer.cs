@@ -30,8 +30,6 @@ namespace AppleMarket {
         
         private AppleSortsDataTable tableAppleSorts;
         
-        private global::System.Data.DataRelation _relationFK_dbo_Apples_dbo_AppleSorts_SortId;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -244,7 +242,6 @@ namespace AppleMarket {
                     this.tableAppleSorts.InitVars();
                 }
             }
-            this._relationFK_dbo_Apples_dbo_AppleSorts_SortId = this.Relations["FK_dbo.Apples_dbo.AppleSorts_SortId"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -261,10 +258,6 @@ namespace AppleMarket {
             base.Tables.Add(this.tableApples);
             this.tableAppleSorts = new AppleSortsDataTable();
             base.Tables.Add(this.tableAppleSorts);
-            this._relationFK_dbo_Apples_dbo_AppleSorts_SortId = new global::System.Data.DataRelation("FK_dbo.Apples_dbo.AppleSorts_SortId", new global::System.Data.DataColumn[] {
-                        this.tableAppleSorts.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableApples.SortIdColumn}, false);
-            this.Relations.Add(this._relationFK_dbo_Apples_dbo_AppleSorts_SortId);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -667,7 +660,9 @@ namespace AppleMarket {
             
             private global::System.Data.DataColumn columnSize;
             
-            private global::System.Data.DataColumn columnSortId;
+            private global::System.Data.DataColumn columnSortName;
+            
+            private global::System.Data.DataColumn columnTaste;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -720,9 +715,17 @@ namespace AppleMarket {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SortIdColumn {
+            public global::System.Data.DataColumn SortNameColumn {
                 get {
-                    return this.columnSortId;
+                    return this.columnSortName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TasteColumn {
+                get {
+                    return this.columnTaste;
                 }
             }
             
@@ -763,15 +766,13 @@ namespace AppleMarket {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplesRow AddApplesRow(int Size, AppleSortsRow _parentAppleSortsRowByFK_dbo_Apples_dbo_AppleSorts_SortId) {
+            public ApplesRow AddApplesRow(int Size, string SortName, string Taste) {
                 ApplesRow rowApplesRow = ((ApplesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Size,
-                        null};
-                if ((_parentAppleSortsRowByFK_dbo_Apples_dbo_AppleSorts_SortId != null)) {
-                    columnValuesArray[2] = _parentAppleSortsRowByFK_dbo_Apples_dbo_AppleSorts_SortId[0];
-                }
+                        SortName,
+                        Taste};
                 rowApplesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowApplesRow);
                 return rowApplesRow;
@@ -803,7 +804,8 @@ namespace AppleMarket {
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
                 this.columnSize = base.Columns["Size"];
-                this.columnSortId = base.Columns["SortId"];
+                this.columnSortName = base.Columns["SortName"];
+                this.columnTaste = base.Columns["Taste"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -813,8 +815,10 @@ namespace AppleMarket {
                 base.Columns.Add(this.columnId);
                 this.columnSize = new global::System.Data.DataColumn("Size", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSize);
-                this.columnSortId = new global::System.Data.DataColumn("SortId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSortId);
+                this.columnSortName = new global::System.Data.DataColumn("SortName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSortName);
+                this.columnTaste = new global::System.Data.DataColumn("Taste", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTaste);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -824,6 +828,8 @@ namespace AppleMarket {
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
                 this.columnSize.AllowDBNull = false;
+                this.columnSortName.MaxLength = 2147483647;
+                this.columnTaste.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1339,41 +1345,58 @@ namespace AppleMarket {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SortId {
+            public string SortName {
                 get {
                     try {
-                        return ((int)(this[this.tableApples.SortIdColumn]));
+                        return ((string)(this[this.tableApples.SortNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'SortId\' в таблице \'Apples\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'SortName\' в таблице \'Apples\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableApples.SortIdColumn] = value;
+                    this[this.tableApples.SortNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AppleSortsRow AppleSortsRow {
+            public string Taste {
                 get {
-                    return ((AppleSortsRow)(this.GetParentRow(this.Table.ParentRelations["FK_dbo.Apples_dbo.AppleSorts_SortId"])));
+                    try {
+                        return ((string)(this[this.tableApples.TasteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Taste\' в таблице \'Apples\' равно DBNull.", e);
+                    }
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_dbo.Apples_dbo.AppleSorts_SortId"]);
+                    this[this.tableApples.TasteColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSortIdNull() {
-                return this.IsNull(this.tableApples.SortIdColumn);
+            public bool IsSortNameNull() {
+                return this.IsNull(this.tableApples.SortNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSortIdNull() {
-                this[this.tableApples.SortIdColumn] = global::System.Convert.DBNull;
+            public void SetSortNameNull() {
+                this[this.tableApples.SortNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTasteNull() {
+                return this.IsNull(this.tableApples.TasteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTasteNull() {
+                this[this.tableApples.TasteColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1456,17 +1479,6 @@ namespace AppleMarket {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTasteNull() {
                 this[this.tableAppleSorts.TasteColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ApplesRow[] GetApplesRows() {
-                if ((this.Table.ChildRelations["FK_dbo.Apples_dbo.AppleSorts_SortId"] == null)) {
-                    return new ApplesRow[0];
-                }
-                else {
-                    return ((ApplesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_dbo.Apples_dbo.AppleSorts_SortId"])));
-                }
             }
         }
         
@@ -1744,12 +1756,18 @@ SELECT MigrationId, ContextKey, Model, ProductVersion FROM __MigrationHistory WH
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MigrationId, ContextKey, Model, ProductVersion FROM dbo.[__MigrationHistor" +
                 "y]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\r\nFROM" +
+                "            Apples INNER JOIN\r\n                         AppleSorts ON Apples.Sor" +
+                "tId = AppleSorts.Id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1774,6 +1792,19 @@ SELECT MigrationId, ContextKey, Model, ProductVersion FROM __MigrationHistory WH
             AppleOrchardDataSet.@__MigrationHistoryDataTable dataTable = new AppleOrchardDataSet.@__MigrationHistoryDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(AppleOrchardDataSet.@__MigrationHistoryDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2084,37 +2115,9 @@ SELECT MigrationId, ContextKey, Model, ProductVersion FROM __MigrationHistory WH
             tableMapping.DataSetTable = "Apples";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("Size", "Size");
-            tableMapping.ColumnMappings.Add("SortId", "SortId");
+            tableMapping.ColumnMappings.Add("SortName", "SortName");
+            tableMapping.ColumnMappings.Add("Taste", "Taste");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Apples] WHERE (([Id] = @Original_Id) AND ([Size] = @Original_S" +
-                "ize) AND ((@IsNull_SortId = 1 AND [SortId] IS NULL) OR ([SortId] = @Original_Sor" +
-                "tId)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Apples] ([Size], [SortId]) VALUES (@Size, @SortId);\r\nSELECT Id" +
-                ", Size, SortId FROM Apples WHERE (Id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Apples] SET [Size] = @Size, [SortId] = @SortId WHERE (([Id] = @Original_Id) AND ([Size] = @Original_Size) AND ((@IsNull_SortId = 1 AND [SortId] IS NULL) OR ([SortId] = @Original_SortId)));
-SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2130,7 +2133,9 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Size, SortId FROM dbo.Apples";
+            this._commandCollection[0].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\r\nFROM" +
+                "            Apples INNER JOIN\r\n                         AppleSorts ON Apples.Sor" +
+                "tId = AppleSorts.Id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2156,141 +2161,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             AppleOrchardDataSet.ApplesDataTable dataTable = new AppleOrchardDataSet.ApplesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(AppleOrchardDataSet.ApplesDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(AppleOrchardDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Apples");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_Size, global::System.Nullable<int> Original_SortId) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_Size));
-            if ((Original_SortId.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_SortId.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Size, global::System.Nullable<int> SortId) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Size));
-            if ((SortId.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(SortId.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Size, global::System.Nullable<int> SortId, int Original_Id, int Original_Size, global::System.Nullable<int> Original_SortId, int Id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Size));
-            if ((SortId.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(SortId.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Size));
-            if ((Original_SortId.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_SortId.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Size, global::System.Nullable<int> SortId, int Original_Id, int Original_Size, global::System.Nullable<int> Original_SortId) {
-            return this.Update(Size, SortId, Original_Id, Original_Size, Original_SortId, Original_Id);
         }
     }
     
@@ -2626,8 +2496,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
         
         private @__MigrationHistoryTableAdapter ___MigrationHistoryTableAdapter;
         
-        private ApplesTableAdapter _applesTableAdapter;
-        
         private AppleSortsTableAdapter _appleSortsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
@@ -2656,20 +2524,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             }
             set {
                 this.___MigrationHistoryTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public ApplesTableAdapter ApplesTableAdapter {
-            get {
-                return this._applesTableAdapter;
-            }
-            set {
-                this._applesTableAdapter = value;
             }
         }
         
@@ -2710,10 +2564,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
                             && (this.___MigrationHistoryTableAdapter.Connection != null))) {
                     return this.___MigrationHistoryTableAdapter.Connection;
                 }
-                if (((this._applesTableAdapter != null) 
-                            && (this._applesTableAdapter.Connection != null))) {
-                    return this._applesTableAdapter.Connection;
-                }
                 if (((this._appleSortsTableAdapter != null) 
                             && (this._appleSortsTableAdapter.Connection != null))) {
                     return this._appleSortsTableAdapter.Connection;
@@ -2734,9 +2584,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
                 if ((this.___MigrationHistoryTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._applesTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._appleSortsTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -2751,30 +2598,21 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateUpdatedRows(AppleOrchardDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._appleSortsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AppleSorts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._appleSortsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._applesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Apples.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._applesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this.___MigrationHistoryTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.@__MigrationHistory.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this.___MigrationHistoryTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._appleSortsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AppleSorts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._appleSortsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -2788,27 +2626,19 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateInsertedRows(AppleOrchardDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._appleSortsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AppleSorts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._appleSortsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._applesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Apples.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._applesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this.___MigrationHistoryTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.@__MigrationHistory.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this.___MigrationHistoryTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._appleSortsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AppleSorts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._appleSortsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -2822,27 +2652,19 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateDeletedRows(AppleOrchardDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this.___MigrationHistoryTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.@__MigrationHistory.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this.___MigrationHistoryTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._applesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Apples.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._applesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._appleSortsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.AppleSorts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._appleSortsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this.___MigrationHistoryTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.@__MigrationHistory.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this.___MigrationHistoryTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -2890,11 +2712,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
-            if (((this._applesTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._applesTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
-                        "r, должны использовать одинаковую строку подключения.");
-            }
             if (((this._appleSortsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._appleSortsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
@@ -2939,15 +2756,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
                     if (this.___MigrationHistoryTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this.___MigrationHistoryTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this.___MigrationHistoryTableAdapter.Adapter);
-                    }
-                }
-                if ((this._applesTableAdapter != null)) {
-                    revertConnections.Add(this._applesTableAdapter, this._applesTableAdapter.Connection);
-                    this._applesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._applesTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._applesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._applesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._applesTableAdapter.Adapter);
                     }
                 }
                 if ((this._appleSortsTableAdapter != null)) {
@@ -3020,10 +2828,6 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
                 if ((this.___MigrationHistoryTableAdapter != null)) {
                     this.___MigrationHistoryTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this.___MigrationHistoryTableAdapter]));
                     this.___MigrationHistoryTableAdapter.Transaction = null;
-                }
-                if ((this._applesTableAdapter != null)) {
-                    this._applesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._applesTableAdapter]));
-                    this._applesTableAdapter.Transaction = null;
                 }
                 if ((this._appleSortsTableAdapter != null)) {
                     this._appleSortsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._appleSortsTableAdapter]));
