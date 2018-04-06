@@ -22,5 +22,13 @@ namespace AppleMarket
             // TODO: данная строка кода позволяет загрузить данные в таблицу "appleOrchardDataSet.Apples". При необходимости она может быть перемещена или удалена.
             this.applesTableAdapter.Fill(this.appleOrchardDataSet.Apples);
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void applesBindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
