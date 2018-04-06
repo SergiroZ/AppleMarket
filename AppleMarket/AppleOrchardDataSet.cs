@@ -7,3 +7,9 @@
         }
     }
 }
+namespace AppleMarket.AppleOrchardDataSetTableAdapters {
+    
+    
+    public partial class ApplesTableAdapter {
+    }
+}

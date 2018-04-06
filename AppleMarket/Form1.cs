@@ -23,11 +23,11 @@ namespace AppleMarket
             this.applesTableAdapter.Fill(this.appleOrchardDataSet.Apples);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void appleOrchardDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
         {
         }
 
-        private void applesBindingSource1_CurrentChanged(object sender, EventArgs e)
+        private void applesBindingSource_CurrentChanged(object sender, EventArgs e)
         {
         }
     }
