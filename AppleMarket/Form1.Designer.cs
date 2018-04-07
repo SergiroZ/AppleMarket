@@ -42,7 +42,7 @@
             this.appleOrchardDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.applesTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.ApplesTableAdapter();
             this.buttonOut = new System.Windows.Forms.Button();
-            this.buttonEdd = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDell = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,22 +142,23 @@
             this.buttonOut.ForeColor = System.Drawing.Color.Black;
             this.buttonOut.Location = new System.Drawing.Point(379, 334);
             this.buttonOut.Name = "buttonOut";
-            this.buttonOut.Size = new System.Drawing.Size(114, 34);
+            this.buttonOut.Size = new System.Drawing.Size(115, 34);
             this.buttonOut.TabIndex = 4;
             this.buttonOut.Text = "Выгрузить";
             this.buttonOut.UseVisualStyleBackColor = false;
             // 
-            // buttonEdd
+            // buttonEdit
             // 
-            this.buttonEdd.BackColor = System.Drawing.Color.DarkKhaki;
-            this.buttonEdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEdd.ForeColor = System.Drawing.Color.Black;
-            this.buttonEdd.Location = new System.Drawing.Point(265, 334);
-            this.buttonEdd.Name = "buttonEdd";
-            this.buttonEdd.Size = new System.Drawing.Size(114, 34);
-            this.buttonEdd.TabIndex = 3;
-            this.buttonEdd.Text = "Изменить";
-            this.buttonEdd.UseVisualStyleBackColor = false;
+            this.buttonEdit.BackColor = System.Drawing.Color.DarkKhaki;
+            this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEdit.ForeColor = System.Drawing.Color.Black;
+            this.buttonEdit.Location = new System.Drawing.Point(265, 334);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(114, 34);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "Изменить";
+            this.buttonEdit.UseVisualStyleBackColor = false;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDell
             // 
@@ -170,6 +171,7 @@
             this.buttonDell.TabIndex = 2;
             this.buttonDell.Text = "Удалить";
             this.buttonDell.UseVisualStyleBackColor = false;
+            this.buttonDell.Click += new System.EventHandler(this.buttonDell_Click);
             // 
             // buttonAdd
             // 
@@ -182,12 +184,14 @@
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.Id.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Id.Frozen = true;
             this.Id.HeaderText = "Id";
             this.Id.MaxInputLength = 10;
             this.Id.Name = "Id";
@@ -197,7 +201,7 @@
             // Size
             // 
             this.Size.DataPropertyName = "Size";
-            this.Size.HeaderText = "Size";
+            this.Size.HeaderText = "Размер";
             this.Size.Name = "Size";
             this.Size.ReadOnly = true;
             this.Size.Width = 50;
@@ -205,15 +209,16 @@
             // SortName
             // 
             this.SortName.DataPropertyName = "SortName";
-            this.SortName.HeaderText = "SortName";
+            this.SortName.HeaderText = "Сорт";
             this.SortName.Name = "SortName";
             this.SortName.ReadOnly = true;
+            this.SortName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.SortName.Width = 150;
             // 
             // Taste
             // 
             this.Taste.DataPropertyName = "Taste";
-            this.Taste.HeaderText = "Taste";
+            this.Taste.HeaderText = "Вкус";
             this.Taste.Name = "Taste";
             this.Taste.ReadOnly = true;
             this.Taste.Width = 170;
@@ -225,7 +230,7 @@
             this.ClientSize = new System.Drawing.Size(538, 403);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonDell);
-            this.Controls.Add(this.buttonEdd);
+            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonOut);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -248,7 +253,7 @@
         private AppleOrchardDataSetTableAdapters.ApplesTableAdapter applesTableAdapter;
         private System.Windows.Forms.BindingSource appleOrchardDataSetBindingSource;
         private System.Windows.Forms.Button buttonOut;
-        private System.Windows.Forms.Button buttonEdd;
+        private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDell;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;

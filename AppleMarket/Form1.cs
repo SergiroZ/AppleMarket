@@ -30,5 +30,23 @@ namespace AppleMarket
         private void applesBindingSource_CurrentChanged(object sender, EventArgs e)
         {
         }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            DataEdit dataEdit = new DataEdit();
+            dataEdit.ShowDialog();
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            DataEdit dataEdit = new DataEdit();
+            dataEdit.ShowDialog();
+        }
+
+        private void buttonDell_Click(object sender, EventArgs e)
+        {
+            int ind = dataGridView1.SelectedCells[0].RowIndex;
+            dataGridView1.Rows.RemoveAt(ind);
+        }
     }
 }
