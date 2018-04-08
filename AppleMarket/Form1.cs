@@ -35,20 +35,42 @@ namespace AppleMarket
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            DataEdit dataEdit = new DataEdit();
-            dataEdit.ShowDialog();
+            if (dataGridView1.RowCount > 0)
+            {
+                DataEdit dataEdit = new DataEdit
+                {
+                    Owner = this
+                };
+                dataEdit.ShowDialog();
+                dataGridView1.Show();
+            }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            DataEdit dataEdit = new DataEdit();
+            DataEdit dataEdit = new DataEdit
+            {
+                Owner = this
+            };
             dataEdit.ShowDialog();
         }
 
         private void buttonDell_Click(object sender, EventArgs e)
         {
-            int ind = dataGridView1.SelectedCells[0].RowIndex;
-            dataGridView1.Rows.RemoveAt(ind);
+            if (dataGridView1.RowCount > 0)
+            {
+                int ind = dataGridView1.SelectedCells[0].RowIndex;
+                dataGridView1.Rows.RemoveAt(ind);
+
+                if (--ind < 0) ind = 0;
+
+                if (dataGridView1.RowCount > 0)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[ind].Cells[0].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[ind].Cells[0];
+                }
+            }
         }
     }
 }

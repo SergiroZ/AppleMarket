@@ -12,7 +12,7 @@ namespace AppleMarket
 {
     public partial class DataEdit : Form
     {
-        private string taste;
+        private int indexParentView = 0;
 
         public DataEdit()
         {
@@ -87,21 +87,96 @@ namespace AppleMarket
 
             //DataTable changedData = dt.GetChanges();
             //da.update(changedData);
+            if (textBox_Size.Text == String.Empty)
+            {
+                string message = "Требуется ввести значение размера яблока.";
+                string caption = "Ошибка ввода.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
 
-            DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
+                // Displays the MessageBox.
+                result = MessageBox.Show(message, caption, buttons);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Closes the parent form.
+                    this.Close();
+                }
+            }
+            else
+            {
+                if (Owner is Form1 main)
+                {
+                    try
+                    {
+                        DataGridViewTextBoxCell sizeCell =
+                        (DataGridViewTextBoxCell)main.dataGridView1.
+                        Rows[indexParentView].Cells["Size"];
+                        sizeCell.Value = Convert.ToInt32(textBox_Size.Text);
+
+                        DataGridViewTextBoxCell sortNameCell =
+                            (DataGridViewTextBoxCell)main.dataGridView1.
+                            Rows[indexParentView].Cells["SortName"];
+                        sortNameCell.Value = comboBox_Sort.Text;
+
+                        DataGridViewTextBoxCell tasteCell =
+                            (DataGridViewTextBoxCell)main.dataGridView1.
+                            Rows[indexParentView].Cells["Taste"];
+                        tasteCell.Value = label_Taste.Text;
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void DataEdit_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "appleOrchardDataSet.AppleSorts". При необходимости она может быть перемещена или удалена.
+            // TODO: данная строка кода позволяет загрузить данные в таблицу
+            // "appleOrchardDataSet.AppleSorts".
+            // При необходимости она может быть перемещена или удалена.
             this.appleSortsTableAdapter.Fill(this.appleOrchardDataSet.AppleSorts);
+            label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[0]["Taste"].ToString();
+
+            if (Owner is Form1 main)
+            {
+                try
+                {
+                    indexParentView = main.dataGridView1.SelectedCells[0].RowIndex;
+
+                    DataGridViewTextBoxCell sizeCell =
+                    (DataGridViewTextBoxCell)main.dataGridView1.
+                    Rows[indexParentView].Cells["Size"];
+                    textBox_Size.Text = sizeCell.Value.ToString();
+
+                    DataGridViewTextBoxCell sortNameCell =
+                        (DataGridViewTextBoxCell)main.dataGridView1.
+                        Rows[indexParentView].Cells["SortName"];
+                    comboBox_Sort.Text = sortNameCell.Value.ToString();
+
+                    DataGridViewTextBoxCell tasteCell =
+                        (DataGridViewTextBoxCell)main.dataGridView1.
+                        Rows[indexParentView].Cells["Taste"];
+                    label_Taste.Text = tasteCell.Value.ToString();
+                }
+                catch (Exception)
+                {
+                }
+            }
         }
 
         private void comboBox_Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            taste = appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex][2].ToString();
-            label_Taste.Text = taste;
+            try
+            {
+                label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void appleSortsBindingSource_CurrentChanged(object sender, EventArgs e)
