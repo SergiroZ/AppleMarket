@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataEdit));
             this.textBox_Size = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,7 +37,11 @@
             this.label_Taste = new System.Windows.Forms.Label();
             this.bott_Cancel = new System.Windows.Forms.Button();
             this.butt_Save = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.appleOrchardDataSet = new AppleMarket.AppleOrchardDataSet();
+            this.appleSortsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appleSortsTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.AppleSortsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appleSortsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox_Size
@@ -70,54 +75,70 @@
             // 
             // comboBox_Sort
             // 
+            this.comboBox_Sort.DataSource = this.appleSortsBindingSource;
+            this.comboBox_Sort.DisplayMember = "SortName";
             this.comboBox_Sort.FormattingEnabled = true;
             this.comboBox_Sort.Location = new System.Drawing.Point(180, 14);
             this.comboBox_Sort.Name = "comboBox_Sort";
             this.comboBox_Sort.Size = new System.Drawing.Size(172, 21);
             this.comboBox_Sort.TabIndex = 5;
+            this.comboBox_Sort.SelectedIndexChanged += new System.EventHandler(this.comboBox_Sort_SelectedIndexChanged);
             // 
             // label_Taste
             // 
             this.label_Taste.AutoSize = true;
-            this.label_Taste.Location = new System.Drawing.Point(22, 51);
+            this.label_Taste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label_Taste.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_Taste.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_Taste.Location = new System.Drawing.Point(25, 46);
             this.label_Taste.Name = "label_Taste";
-            this.label_Taste.Size = new System.Drawing.Size(31, 13);
+            this.label_Taste.Size = new System.Drawing.Size(41, 18);
             this.label_Taste.TabIndex = 6;
             this.label_Taste.Text = "Вкус";
+            this.label_Taste.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bott_Cancel
             // 
+            this.bott_Cancel.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.bott_Cancel.Location = new System.Drawing.Point(74, 100);
             this.bott_Cancel.Name = "bott_Cancel";
             this.bott_Cancel.Size = new System.Drawing.Size(115, 30);
             this.bott_Cancel.TabIndex = 7;
             this.bott_Cancel.Text = "Отменить";
-            this.bott_Cancel.UseVisualStyleBackColor = true;
+            this.bott_Cancel.UseVisualStyleBackColor = false;
             this.bott_Cancel.Click += new System.EventHandler(this.bott_Cancel_Click);
             // 
             // butt_Save
             // 
+            this.butt_Save.BackColor = System.Drawing.Color.DarkKhaki;
             this.butt_Save.Location = new System.Drawing.Point(195, 100);
             this.butt_Save.Name = "butt_Save";
             this.butt_Save.Size = new System.Drawing.Size(115, 31);
             this.butt_Save.TabIndex = 8;
             this.butt_Save.Text = "Сохранить";
-            this.butt_Save.UseVisualStyleBackColor = true;
+            this.butt_Save.UseVisualStyleBackColor = false;
             this.butt_Save.Click += new System.EventHandler(this.butt_Save_Click);
             // 
-            // label3
+            // appleOrchardDataSet
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(331, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "______________________________________________________";
+            this.appleOrchardDataSet.DataSetName = "AppleOrchardDataSet";
+            this.appleOrchardDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // appleSortsBindingSource
+            // 
+            this.appleSortsBindingSource.DataMember = "AppleSorts";
+            this.appleSortsBindingSource.DataSource = this.appleOrchardDataSet;
+            this.appleSortsBindingSource.CurrentChanged += new System.EventHandler(this.appleSortsBindingSource_CurrentChanged);
+            // 
+            // appleSortsTableAdapter
+            // 
+            this.appleSortsTableAdapter.ClearBeforeFill = true;
             // 
             // DataEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.YellowGreen;
             this.ClientSize = new System.Drawing.Size(377, 153);
             this.Controls.Add(this.butt_Save);
             this.Controls.Add(this.bott_Cancel);
@@ -126,13 +147,15 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_Size);
-            this.Controls.Add(this.label3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DataEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Информация о яблоке";
+            this.Load += new System.EventHandler(this.DataEdit_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appleSortsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +169,8 @@
         private System.Windows.Forms.Label label_Taste;
         private System.Windows.Forms.Button bott_Cancel;
         private System.Windows.Forms.Button butt_Save;
-        private System.Windows.Forms.Label label3;
+        private AppleOrchardDataSet appleOrchardDataSet;
+        private System.Windows.Forms.BindingSource appleSortsBindingSource;
+        private AppleOrchardDataSetTableAdapters.AppleSortsTableAdapter appleSortsTableAdapter;
     }
 }

@@ -12,6 +12,8 @@ namespace AppleMarket
 {
     public partial class DataEdit : Form
     {
+        private string taste;
+
         public DataEdit()
         {
             InitializeComponent();
@@ -73,8 +75,37 @@ namespace AppleMarket
         private void butt_Save_Click(object sender, EventArgs e)
         {
             //*****************
+            //SqlConnection con = new SqlConnection(constr);
+            //SqlCommand cmd = new SqlCommand("SELECT * FROM tProcedures", con);
+            //SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
+            //datagridview1.DataSource = dt;
+            //*****************
+            //DataRowView drv = dataGridView1.CurrentRow.DataBoundItem as DataRowView;
+            //DataRow[] rowsToUpdate = new DataRow[] { drv.Row };
+
+            //DataTable changedData = dt.GetChanges();
+            //da.update(changedData);
+
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void DataEdit_Load(object sender, EventArgs e)
+        {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "appleOrchardDataSet.AppleSorts". При необходимости она может быть перемещена или удалена.
+            this.appleSortsTableAdapter.Fill(this.appleOrchardDataSet.AppleSorts);
+        }
+
+        private void comboBox_Sort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            taste = appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex][2].ToString();
+            label_Taste.Text = taste;
+        }
+
+        private void appleSortsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
         }
     }
 }
