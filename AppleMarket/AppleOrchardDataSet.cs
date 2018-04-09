@@ -1,15 +1,16 @@
-﻿namespace AppleMarket
+﻿using System;
+using System.Data;
+
+namespace AppleMarket
 {
     partial class AppleOrchardDataSet
     {
+        partial class AppleSortsRelativeDataTable
+        {
+        }
+
         partial class ApplesDataTable
         {
         }
-    }
-}
-namespace AppleMarket.AppleOrchardDataSetTableAdapters {
-    
-    
-    public partial class ApplesTableAdapter {
     }
 }

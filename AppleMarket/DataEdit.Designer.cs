@@ -119,6 +119,7 @@
             // bott_Cancel
             // 
             this.bott_Cancel.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.bott_Cancel.DialogResult = System.Windows.Forms.DialogResult.No;
             this.bott_Cancel.Location = new System.Drawing.Point(46, 157);
             this.bott_Cancel.Name = "bott_Cancel";
             this.bott_Cancel.Size = new System.Drawing.Size(79, 30);
@@ -130,6 +131,7 @@
             // butt_Save
             // 
             this.butt_Save.BackColor = System.Drawing.Color.DarkKhaki;
+            this.butt_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.butt_Save.Location = new System.Drawing.Point(151, 157);
             this.butt_Save.Name = "butt_Save";
             this.butt_Save.Size = new System.Drawing.Size(79, 31);
@@ -188,13 +190,13 @@
         private System.Windows.Forms.TextBox textBox_Size;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox_Sort;
         private System.Windows.Forms.Label label_Taste;
         private System.Windows.Forms.Button bott_Cancel;
         private System.Windows.Forms.Button butt_Save;
         private AppleOrchardDataSet appleOrchardDataSet;
-        private System.Windows.Forms.BindingSource appleSortsBindingSource;
         private AppleOrchardDataSetTableAdapters.AppleSortsTableAdapter appleSortsTableAdapter;
         private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ComboBox comboBox_Sort;
+        public System.Windows.Forms.BindingSource appleSortsBindingSource;
     }
 }

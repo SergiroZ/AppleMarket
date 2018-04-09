@@ -49,6 +49,11 @@
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Taste = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sortNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tasteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.appleSortsRelativeTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).BeginInit();
@@ -79,7 +84,11 @@
             this.Id,
             this.Size,
             this.SortName,
-            this.Taste});
+            this.Taste,
+            this.sortNameDataGridViewTextBoxColumn,
+            this.idDataGridViewTextBoxColumn,
+            this.sizeDataGridViewTextBoxColumn,
+            this.tasteDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.applesBindingSource;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.PaleGoldenrod;
@@ -116,7 +125,7 @@
             // applesBindingSource
             // 
             this.applesBindingSource.AllowNew = false;
-            this.applesBindingSource.DataMember = "Apples";
+            this.applesBindingSource.DataMember = "AppleSortsRelative";
             this.applesBindingSource.DataSource = this.appleOrchardDataSet;
             this.applesBindingSource.CurrentChanged += new System.EventHandler(this.applesBindingSource_CurrentChanged);
             // 
@@ -223,6 +232,38 @@
             this.Taste.ReadOnly = true;
             this.Taste.Width = 170;
             // 
+            // sortNameDataGridViewTextBoxColumn
+            // 
+            this.sortNameDataGridViewTextBoxColumn.DataPropertyName = "SortName";
+            this.sortNameDataGridViewTextBoxColumn.HeaderText = "SortName";
+            this.sortNameDataGridViewTextBoxColumn.Name = "sortNameDataGridViewTextBoxColumn";
+            this.sortNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sizeDataGridViewTextBoxColumn
+            // 
+            this.sizeDataGridViewTextBoxColumn.DataPropertyName = "Size";
+            this.sizeDataGridViewTextBoxColumn.HeaderText = "Size";
+            this.sizeDataGridViewTextBoxColumn.Name = "sizeDataGridViewTextBoxColumn";
+            this.sizeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tasteDataGridViewTextBoxColumn
+            // 
+            this.tasteDataGridViewTextBoxColumn.DataPropertyName = "Taste";
+            this.tasteDataGridViewTextBoxColumn.HeaderText = "Taste";
+            this.tasteDataGridViewTextBoxColumn.Name = "tasteDataGridViewTextBoxColumn";
+            this.tasteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // appleSortsRelativeTableAdapter
+            // 
+            this.appleSortsRelativeTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,6 +301,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Taste;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sortNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tasteDataGridViewTextBoxColumn;
+        private AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter appleSortsRelativeTableAdapter;
     }
 }
 

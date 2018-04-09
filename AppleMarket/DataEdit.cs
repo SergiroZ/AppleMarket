@@ -68,25 +68,12 @@ namespace AppleMarket
 
         private void bott_Cancel_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
         }
 
         private void butt_Save_Click(object sender, EventArgs e)
         {
-            //*****************
-            //SqlConnection con = new SqlConnection(constr);
-            //SqlCommand cmd = new SqlCommand("SELECT * FROM tProcedures", con);
-            //SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //DataTable dt = new DataTable();
-            //da.Fill(dt);
-            //datagridview1.DataSource = dt;
-            //*****************
-            //DataRowView drv = dataGridView1.CurrentRow.DataBoundItem as DataRowView;
-            //DataRow[] rowsToUpdate = new DataRow[] { drv.Row };
-
-            //DataTable changedData = dt.GetChanges();
-            //da.update(changedData);
             if (textBox_Size.Text == String.Empty)
             {
                 string message = "Требуется ввести значение размера яблока.";
@@ -94,12 +81,12 @@ namespace AppleMarket
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 DialogResult result;
 
-                // Displays the MessageBox.
                 result = MessageBox.Show(message, caption, buttons);
 
                 if (result == DialogResult.Yes)
                 {
                     // Closes the parent form.
+                    DialogResult = DialogResult.No;
                     this.Close();
                 }
             }
@@ -168,12 +155,17 @@ namespace AppleMarket
             }
         }
 
-        private void comboBox_Sort_SelectedIndexChanged(object sender, EventArgs e)
+        public void comboBox_Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 label_Taste.Text = appleOrchardDataSet.AppleSorts.
                     Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
+                if (Owner is Form1 main)
+                {
+                    main.CntrIndex = (int)appleOrchardDataSet.AppleSorts.
+                    Rows[comboBox_Sort.SelectedIndex]["Id"];
+                }
             }
             catch (Exception)
             {
