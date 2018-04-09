@@ -19,9 +19,9 @@ namespace AppleMarket
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные
-            // в таблицу "appleOrchardDataSet.Apples".
-            // При необходимости она может быть перемещена или удалена.
+            // *****************************************
+            //  dataset - appleOrchardDataSet.Apples
+            //  dataadapter - applesTableAdapter
             this.applesTableAdapter.Fill(this.appleOrchardDataSet.Apples);
         }
 
@@ -48,10 +48,16 @@ namespace AppleMarket
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            // добавляем новую строку в Apples из appleOrchardDataSet
+            DataRow row = appleOrchardDataSet.Apples.NewRow();
+            appleOrchardDataSet.Apples.Rows.Add(row);
             DataEdit dataEdit = new DataEdit
             {
                 Owner = this
             };
+
+            //dataGridView1.Rows[ind].Cells[0].Selected = true;
+            //dataGridView1.CurrentCell = dataGridView1.Rows[ind].Cells[0];
             dataEdit.ShowDialog();
         }
 

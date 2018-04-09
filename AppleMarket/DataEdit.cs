@@ -172,7 +172,8 @@ namespace AppleMarket
         {
             try
             {
-                label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
+                label_Taste.Text = appleOrchardDataSet.AppleSorts.
+                    Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
             }
             catch (Exception)
             {
