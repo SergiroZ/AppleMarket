@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppleMarket
@@ -68,56 +61,8 @@ namespace AppleMarket
 
         private void bott_Cancel_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void butt_Save_Click(object sender, EventArgs e)
-        {
-            if (textBox_Size.Text == String.Empty)
-            {
-                string message = "Требуется ввести значение размера яблока.";
-                string caption = "Ошибка ввода.";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                DialogResult result;
-
-                result = MessageBox.Show(message, caption, buttons);
-
-                if (result == DialogResult.Yes)
-                {
-                    // Closes the parent form.
-                    DialogResult = DialogResult.No;
-                    this.Close();
-                }
-            }
-            else
-            {
-                if (Owner is Form1 main)
-                {
-                    try
-                    {
-                        DataGridViewTextBoxCell sizeCell =
-                        (DataGridViewTextBoxCell)main.dataGridView1.
-                        Rows[indexParentView].Cells["Size"];
-                        sizeCell.Value = Convert.ToInt32(textBox_Size.Text);
-
-                        DataGridViewTextBoxCell sortNameCell =
-                            (DataGridViewTextBoxCell)main.dataGridView1.
-                            Rows[indexParentView].Cells["SortName"];
-                        sortNameCell.Value = comboBox_Sort.Text;
-
-                        DataGridViewTextBoxCell tasteCell =
-                            (DataGridViewTextBoxCell)main.dataGridView1.
-                            Rows[indexParentView].Cells["Taste"];
-                        tasteCell.Value = label_Taste.Text;
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-                DialogResult = DialogResult.OK;
-                Close();
-            }
         }
 
         private void DataEdit_Load(object sender, EventArgs e)
@@ -174,6 +119,44 @@ namespace AppleMarket
 
         private void appleSortsBindingSource_CurrentChanged(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox_Size.Text == String.Empty)
+            {
+                string message = "Требуется ввести значение размера яблока.";
+                string caption = "Ошибка ввода.";
+                MessageBox.Show(message, caption);
+            }
+            else
+            {
+                if (Owner is Form1 main)
+                {
+                    try
+                    {
+                        DataGridViewTextBoxCell sizeCell =
+                        (DataGridViewTextBoxCell)main.dataGridView1.
+                        Rows[indexParentView].Cells["Size"];
+                        sizeCell.Value = Convert.ToInt32(textBox_Size.Text);
+
+                        DataGridViewTextBoxCell sortNameCell =
+                            (DataGridViewTextBoxCell)main.dataGridView1.
+                            Rows[indexParentView].Cells["SortName"];
+                        sortNameCell.Value = comboBox_Sort.Text;
+
+                        DataGridViewTextBoxCell tasteCell =
+                            (DataGridViewTextBoxCell)main.dataGridView1.
+                            Rows[indexParentView].Cells["Taste"];
+                        tasteCell.Value = label_Taste.Text;
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
     }
 }
