@@ -42,18 +42,28 @@ namespace AppleMarket
                 };
                 dataEdit.ShowDialog();
                 dataGridView1.Show();
+
+                int keyToEdit = (int)dataGridView1.SelectedCells[0].Value;
+                int sizeToEdit = (int)dataGridView1.SelectedCells[1].Value;
+
+                appleOrchardDataSet.Apples.Rows.Find(keyToEdit).SetField("Size", sizeToEdit);
+                appleOrchardDataSet.Apples.Rows.Find(keyToEdit).SetField("SortId", CntrIndex);
+                applesTableAdapter.Update(appleOrchardDataSet.Apples);
             }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            // добавляем новую строку в Apples и AppleSortsRelative из appleOrchardDataSet
+            // добавляем новую строку в Apples и
+            // AppleSortsRelative из appleOrchardDataSet
             DataRow row = appleOrchardDataSet.Apples.NewRow(),
                 rowrel = appleOrchardDataSet.AppleSortsRelative.NewRow();
             if (dataGridView1.Rows.Count != 0)
             {
-                rowrel["SortName"] = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["SortName"].Value;
-                rowrel["Taste"] = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Taste"].Value;
+                rowrel["SortName"] = dataGridView1.Rows[
+                    dataGridView1.Rows.Count - 1].Cells["SortName"].Value;
+                rowrel["Taste"] = dataGridView1.Rows[
+                    dataGridView1.Rows.Count - 1].Cells["Taste"].Value;
             }
 
             appleOrchardDataSet.AppleSortsRelative.Rows.Add(rowrel);
@@ -65,8 +75,10 @@ namespace AppleMarket
             if (dataGridView1.Rows.Count == 0)
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             else
-                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+                dataGridView1.CurrentCell = dataGridView1.Rows[
+                    dataGridView1.Rows.Count - 1].Cells[0];
             dialogResult = dataEdit.ShowDialog();
+
             SaveDataToDB(dialogResult);
 
             if (dataGridView1.RowCount > 0)
@@ -82,16 +94,22 @@ namespace AppleMarket
         {
             if (dataGridView1.RowCount > 0)
             {
-                int ind = dataGridView1.SelectedCells[0].RowIndex;
-                dataGridView1.Rows.RemoveAt(ind);
+                int indexToDell = dataGridView1.SelectedCells[0].RowIndex;
+                int keyToDell = (int)dataGridView1.SelectedCells[0].Value;
+                appleOrchardDataSet.Apples.Rows.Find(keyToDell).Delete();
 
-                if (--ind < 0) ind = 0;
+                dataGridView1.Rows.RemoveAt(indexToDell);
+
+                if (--indexToDell < 0) indexToDell = 0;
 
                 if (dataGridView1.RowCount > 0)
                 {
                     dataGridView1.ClearSelection();
-                    dataGridView1.Rows[ind].Cells[0].Selected = true;
-                    dataGridView1.CurrentCell = dataGridView1.Rows[ind].Cells[0];
+                    var id = dataGridView1.Rows[indexToDell].Cells["Id"];
+                    id.Selected = true;
+                    dataGridView1.CurrentCell = id;
+
+                    applesTableAdapter.Update(appleOrchardDataSet.Apples);
                 }
             }
         }
