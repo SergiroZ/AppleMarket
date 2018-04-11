@@ -121,7 +121,7 @@ namespace AppleMarket
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Save_Click(object sender, EventArgs e)
         {
             if (textBox_Size.Text == String.Empty)
             {

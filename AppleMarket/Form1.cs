@@ -7,7 +7,7 @@ namespace AppleMarket
     public partial class Form1 : Form
     {
         private DialogResult dialogResult;
-        public int CntrIndex = 0;
+        public int CntrIndex = 1;
 
         public Form1()
         {
@@ -72,6 +72,7 @@ namespace AppleMarket
             {
                 Owner = this
             };
+
             if (dataGridView1.Rows.Count == 0)
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             else
@@ -79,7 +80,22 @@ namespace AppleMarket
                     dataGridView1.Rows.Count - 1].Cells[0];
             dialogResult = dataEdit.ShowDialog();
 
-            SaveDataToDB(dialogResult);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+            }
+
+            if (dialogResult == DialogResult.OK)
+            {
+                DataRowView drv = dataGridView1.CurrentRow.DataBoundItem as DataRowView;
+                //(CntrIndex==null)?
+                var myNewRow = appleOrchardDataSet.Apples.NewRow();
+                myNewRow["Size"] = drv["Size"];
+                myNewRow["SortID"] = CntrIndex;
+                appleOrchardDataSet.Apples.Rows.Add(myNewRow);
+                applesTableAdapter.Update(appleOrchardDataSet.Apples);
+                this.appleSortsRelativeTableAdapter.Fill(appleOrchardDataSet.AppleSortsRelative);
+            }
 
             if (dataGridView1.RowCount > 0)
             {
@@ -99,6 +115,7 @@ namespace AppleMarket
                 appleOrchardDataSet.Apples.Rows.Find(keyToDell).Delete();
 
                 dataGridView1.Rows.RemoveAt(indexToDell);
+                applesTableAdapter.Update(appleOrchardDataSet.Apples);
 
                 if (--indexToDell < 0) indexToDell = 0;
 
@@ -108,26 +125,7 @@ namespace AppleMarket
                     var id = dataGridView1.Rows[indexToDell].Cells["Id"];
                     id.Selected = true;
                     dataGridView1.CurrentCell = id;
-
-                    applesTableAdapter.Update(appleOrchardDataSet.Apples);
                 }
-            }
-        }
-
-        private void SaveDataToDB(DialogResult dialogResult)
-        {
-            if (dialogResult == DialogResult.Cancel)
-            {
-                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
-            }
-            if (dialogResult == DialogResult.OK)
-            {
-                DataRowView drv = dataGridView1.CurrentRow.DataBoundItem as DataRowView;
-                var myNewRow = appleOrchardDataSet.Apples.NewRow();
-                myNewRow["Size"] = drv["Size"];
-                myNewRow["SortID"] = CntrIndex;
-                appleOrchardDataSet.Apples.Rows.Add(myNewRow);
-                applesTableAdapter.Update(appleOrchardDataSet.Apples);
             }
         }
     }

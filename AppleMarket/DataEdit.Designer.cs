@@ -68,7 +68,7 @@
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label1.Size = new System.Drawing.Size(100, 25);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 6;
             this.label1.Text = "Размер";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -81,7 +81,7 @@
             this.label2.Location = new System.Drawing.Point(28, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 7;
             this.label2.Text = "Сорт";
             // 
             // comboBox_Sort
@@ -92,7 +92,7 @@
             this.comboBox_Sort.Location = new System.Drawing.Point(81, 94);
             this.comboBox_Sort.Name = "comboBox_Sort";
             this.comboBox_Sort.Size = new System.Drawing.Size(150, 21);
-            this.comboBox_Sort.TabIndex = 5;
+            this.comboBox_Sort.TabIndex = 2;
             this.comboBox_Sort.ValueMember = "Taste";
             this.comboBox_Sort.SelectedIndexChanged += new System.EventHandler(this.comboBox_Sort_SelectedIndexChanged);
             // 
@@ -117,7 +117,7 @@
             this.label_Taste.MinimumSize = new System.Drawing.Size(150, 36);
             this.label_Taste.Name = "label_Taste";
             this.label_Taste.Size = new System.Drawing.Size(150, 36);
-            this.label_Taste.TabIndex = 6;
+            this.label_Taste.TabIndex = 3;
             this.label_Taste.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // bott_Cancel
@@ -127,7 +127,7 @@
             this.bott_Cancel.Location = new System.Drawing.Point(31, 186);
             this.bott_Cancel.Name = "bott_Cancel";
             this.bott_Cancel.Size = new System.Drawing.Size(93, 30);
-            this.bott_Cancel.TabIndex = 7;
+            this.bott_Cancel.TabIndex = 4;
             this.bott_Cancel.Text = "Отменить";
             this.bott_Cancel.UseVisualStyleBackColor = false;
             this.bott_Cancel.Click += new System.EventHandler(this.bott_Cancel_Click);
@@ -146,7 +146,7 @@
             this.label3.MinimumSize = new System.Drawing.Size(46, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 20);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 8;
             this.label3.Text = "Вкус";
             // 
             // button1
@@ -155,10 +155,10 @@
             this.button1.Location = new System.Drawing.Point(136, 186);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 30);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Save_Click);
             // 
             // DataEdit
             // 
