@@ -16,5 +16,21 @@ namespace AppleMarket
         {
             InitializeComponent();
         }
+
+        private void tbSortName_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tbTaste_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void CancelSort_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void SaveSort_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
