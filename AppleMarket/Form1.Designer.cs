@@ -45,15 +45,11 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDell = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.appleSortsRelativeTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Taste = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sortNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tasteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.appleSortsRelativeTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).BeginInit();
@@ -84,11 +80,7 @@
             this.Id,
             this.Size,
             this.SortName,
-            this.Taste,
-            this.sortNameDataGridViewTextBoxColumn,
-            this.idDataGridViewTextBoxColumn,
-            this.sizeDataGridViewTextBoxColumn,
-            this.tasteDataGridViewTextBoxColumn});
+            this.Taste});
             this.dataGridView1.DataSource = this.applesBindingSource;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.PaleGoldenrod;
@@ -99,7 +91,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(37, 31);
+            this.dataGridView1.Location = new System.Drawing.Point(38, 21);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -112,11 +104,13 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Azure;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView1.RowHeadersWidth = 25;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Honeydew;
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.DarkGreen;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(456, 297);
             this.dataGridView1.StandardTab = true;
@@ -195,6 +189,10 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
+            // appleSortsRelativeTableAdapter
+            // 
+            this.appleSortsRelativeTableAdapter.ClearBeforeFill = true;
+            // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
@@ -230,39 +228,7 @@
             this.Taste.HeaderText = "Вкус";
             this.Taste.Name = "Taste";
             this.Taste.ReadOnly = true;
-            this.Taste.Width = 170;
-            // 
-            // sortNameDataGridViewTextBoxColumn
-            // 
-            this.sortNameDataGridViewTextBoxColumn.DataPropertyName = "SortName";
-            this.sortNameDataGridViewTextBoxColumn.HeaderText = "SortName";
-            this.sortNameDataGridViewTextBoxColumn.Name = "sortNameDataGridViewTextBoxColumn";
-            this.sortNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sizeDataGridViewTextBoxColumn
-            // 
-            this.sizeDataGridViewTextBoxColumn.DataPropertyName = "Size";
-            this.sizeDataGridViewTextBoxColumn.HeaderText = "Size";
-            this.sizeDataGridViewTextBoxColumn.Name = "sizeDataGridViewTextBoxColumn";
-            this.sizeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tasteDataGridViewTextBoxColumn
-            // 
-            this.tasteDataGridViewTextBoxColumn.DataPropertyName = "Taste";
-            this.tasteDataGridViewTextBoxColumn.HeaderText = "Taste";
-            this.tasteDataGridViewTextBoxColumn.Name = "tasteDataGridViewTextBoxColumn";
-            this.tasteDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // appleSortsRelativeTableAdapter
-            // 
-            this.appleSortsRelativeTableAdapter.ClearBeforeFill = true;
+            this.Taste.Width = 190;
             // 
             // Form1
             // 
@@ -275,6 +241,8 @@
             this.Controls.Add(this.buttonOut);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Apple Market";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -297,15 +265,11 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonDell;
         private System.Windows.Forms.Button buttonAdd;
+        private AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter appleSortsRelativeTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Taste;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sortNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tasteDataGridViewTextBoxColumn;
-        private AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter appleSortsRelativeTableAdapter;
     }
 }
 

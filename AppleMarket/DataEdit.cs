@@ -6,8 +6,8 @@ namespace AppleMarket
     public partial class DataEdit : Form
     {
         private int indexParentView = 0;
-        private System.Data.DataRow myNewRow;
-        private DialogResult dialogResultNewSort;
+        public System.Data.DataRow myEditNewRow;
+        public DialogResult dialogResultNewSort;
 
         public DataEdit()
         {
@@ -74,11 +74,7 @@ namespace AppleMarket
             // При необходимости она может быть перемещена или удалена.
             this.appleSortsTableAdapter.Fill(this.appleOrchardDataSet.AppleSorts);
 
-            myNewRow = appleOrchardDataSet.AppleSorts.NewRow();
-            myNewRow["Id"] = 0;
-            myNewRow["SortName"] = @"--добавить новый сорт--";
-            myNewRow["Taste"] = "";
-            appleOrchardDataSet.AppleSorts.Rows.Add(myNewRow);
+            SetValueNewStr();
             label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[0]["Taste"].ToString();
 
             if (Owner is Form1 main)
@@ -122,17 +118,18 @@ namespace AppleMarket
 
                     newSort.ShowDialog();
 
-                    if (dialogResultNewSort == DialogResult.Cancel)
-                    {
-                    }
-
                     if (dialogResultNewSort == DialogResult.OK)
                     {
+                        SetValueNewStr();
                     }
+
+                    comboBox_Sort.SelectedIndex = comboBox_Sort.Items.Count - 2;
+                    iId = (int)appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex]["Id"];
                 }
 
                 label_Taste.Text = appleOrchardDataSet.AppleSorts.
                     Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
+
                 if (Owner is Form1 main)
                 {
                     main.CntrIndex = iId;
@@ -157,7 +154,7 @@ namespace AppleMarket
             }
             else
             {
-                appleOrchardDataSet.AppleSorts.Rows.Remove(myNewRow);
+                appleOrchardDataSet.AppleSorts.Rows.Remove(myEditNewRow);
                 if (Owner is Form1 main)
                 {
                     try
@@ -184,6 +181,15 @@ namespace AppleMarket
                 DialogResult = DialogResult.OK;
                 Close();
             }
+        }
+
+        private void SetValueNewStr()
+        {
+            myEditNewRow = appleOrchardDataSet.AppleSorts.NewRow();
+            myEditNewRow["Id"] = 0;
+            myEditNewRow["SortName"] = @" --добавить новый сорт--";
+            myEditNewRow["Taste"] = "";
+            appleOrchardDataSet.AppleSorts.Rows.Add(myEditNewRow);
         }
     }
 }

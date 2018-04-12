@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppleMarket
 {
     public partial class NewSort : Form
     {
+        private DataRow myNewRow;
+
         public NewSort()
         {
             InitializeComponent();
@@ -31,6 +27,16 @@ namespace AppleMarket
 
         private void SaveSort_Click(object sender, EventArgs e)
         {
+            if (Owner is DataEdit main)
+            {
+                main.appleOrchardDataSet.AppleSorts.Rows.Find(0).Delete();
+                myNewRow = main.appleOrchardDataSet.AppleSorts.NewRow();
+                myNewRow["SortName"] = tbSortName.Text;
+                myNewRow["Taste"] = tbTaste.Text;
+                main.appleOrchardDataSet.AppleSorts.Rows.Add(myNewRow);
+                main.appleSortsTableAdapter.Update(main.appleOrchardDataSet.AppleSorts);
+                main.dialogResultNewSort = DialogResult.OK;
+            }
         }
     }
 }

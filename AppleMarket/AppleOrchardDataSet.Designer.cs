@@ -2282,9 +2282,9 @@ SELECT MigrationId, ContextKey, Model, ProductVersion FROM __MigrationHistory WH
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\r\nFROM" +
-                "            Apples INNER JOIN\r\n                         AppleSorts ON Apples.Sor" +
-                "tId = AppleSorts.Id";
+            this._commandCollection[1].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\nFROM " +
+                "           Apples INNER JOIN\n                         AppleSorts ON Apples.SortI" +
+                "d = AppleSorts.Id";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2648,8 +2648,8 @@ SELECT MigrationId, ContextKey, Model, ProductVersion FROM __MigrationHistory WH
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Apples] ([Size], [SortId]) VALUES (@Size, @SortId);\r\nSELECT Id, Size" +
-                ", SortId FROM Apples WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Apples] ([Size], [SortId]) VALUES (@Size, @SortId);\nSELECT Id, Size," +
+                " SortId FROM Apples WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SortId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2681,7 +2681,7 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        Id, Size, SortId\r\nFROM            Apples";
+            this._commandCollection[0].CommandText = "SELECT        Id, Size, SortId\nFROM            Apples";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3001,16 +3001,16 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[AppleSorts] ([SortName], [Taste]) VALUES (@SortName, @Taste);\r" +
-                "\nSELECT Id, SortName, Taste FROM AppleSorts WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[AppleSorts] ([SortName], [Taste]) VALUES (@SortName, @Taste);\n" +
+                "SELECT Id, SortName, Taste FROM AppleSorts WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SortName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Taste", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Taste", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[AppleSorts] SET [SortName] = @SortName, [Taste] = @Taste WHERE (([I" +
-                "d] = @Original_Id));\r\nSELECT Id, SortName, Taste FROM AppleSorts WHERE (Id = @Id" +
-                ")";
+                "d] = @Original_Id));\nSELECT Id, SortName, Taste FROM AppleSorts WHERE (Id = @Id)" +
+                "";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SortName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SortName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Taste", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Taste", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3328,9 +3328,9 @@ SELECT Id, Size, SortId FROM Apples WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\r\nFROM" +
-                "            Apples INNER JOIN\r\n                         AppleSorts ON Apples.Sor" +
-                "tId = AppleSorts.Id";
+            this._commandCollection[0].CommandText = "SELECT        Apples.Id, Apples.Size, AppleSorts.SortName, AppleSorts.Taste\nFROM " +
+                "           Apples INNER JOIN\n                         AppleSorts ON Apples.SortI" +
+                "d = AppleSorts.Id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

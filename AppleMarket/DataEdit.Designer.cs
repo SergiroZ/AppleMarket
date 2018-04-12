@@ -198,8 +198,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_Taste;
         private System.Windows.Forms.Button bott_Cancel;
-        private AppleOrchardDataSet appleOrchardDataSet;
-        private AppleOrchardDataSetTableAdapters.AppleSortsTableAdapter appleSortsTableAdapter;
+        public AppleOrchardDataSet appleOrchardDataSet;
+        public AppleOrchardDataSetTableAdapters.AppleSortsTableAdapter appleSortsTableAdapter;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox comboBox_Sort;
         public System.Windows.Forms.BindingSource appleSortsBindingSource;

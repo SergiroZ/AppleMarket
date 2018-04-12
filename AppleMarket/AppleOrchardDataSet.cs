@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data;
-
-namespace AppleMarket
+﻿namespace AppleMarket
 {
     partial class AppleOrchardDataSet
     {
