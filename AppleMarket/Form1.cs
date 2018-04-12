@@ -88,7 +88,6 @@ namespace AppleMarket
             if (dialogResult == DialogResult.OK)
             {
                 DataRowView drv = dataGridView1.CurrentRow.DataBoundItem as DataRowView;
-                //(CntrIndex==null)?
                 var myNewRow = appleOrchardDataSet.Apples.NewRow();
                 myNewRow["Size"] = drv["Size"];
                 myNewRow["SortID"] = CntrIndex;

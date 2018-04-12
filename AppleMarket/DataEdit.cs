@@ -6,6 +6,7 @@ namespace AppleMarket
     public partial class DataEdit : Form
     {
         private int indexParentView = 0;
+        private System.Data.DataRow myNewRow;
 
         public DataEdit()
         {
@@ -71,6 +72,12 @@ namespace AppleMarket
             // "appleOrchardDataSet.AppleSorts".
             // При необходимости она может быть перемещена или удалена.
             this.appleSortsTableAdapter.Fill(this.appleOrchardDataSet.AppleSorts);
+
+            myNewRow = appleOrchardDataSet.AppleSorts.NewRow();
+            myNewRow["Id"] = 0;
+            myNewRow["SortName"] = @"--новый сорт--";
+            myNewRow["Taste"] = "";
+            appleOrchardDataSet.AppleSorts.Rows.Add(myNewRow);
             label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[0]["Taste"].ToString();
 
             if (Owner is Form1 main)
@@ -104,12 +111,17 @@ namespace AppleMarket
         {
             try
             {
+                int iId = (int)appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex]["Id"];
+                if (iId == 0)
+                {
+                    MessageBox.Show(iId.ToString());
+                }
+
                 label_Taste.Text = appleOrchardDataSet.AppleSorts.
                     Rows[comboBox_Sort.SelectedIndex]["Taste"].ToString();
                 if (Owner is Form1 main)
                 {
-                    main.CntrIndex = (int)appleOrchardDataSet.AppleSorts.
-                    Rows[comboBox_Sort.SelectedIndex]["Id"];
+                    main.CntrIndex = iId;
                 }
             }
             catch (Exception)
@@ -131,6 +143,7 @@ namespace AppleMarket
             }
             else
             {
+                appleOrchardDataSet.AppleSorts.Rows.Remove(myNewRow);
                 if (Owner is Form1 main)
                 {
                     try

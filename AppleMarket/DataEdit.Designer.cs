@@ -88,6 +88,7 @@
             // 
             this.comboBox_Sort.DataSource = this.appleSortsBindingSource;
             this.comboBox_Sort.DisplayMember = "SortName";
+            this.comboBox_Sort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Sort.FormattingEnabled = true;
             this.comboBox_Sort.Location = new System.Drawing.Point(81, 94);
             this.comboBox_Sort.Name = "comboBox_Sort";
