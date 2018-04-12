@@ -78,6 +78,7 @@ namespace AppleMarket
             else
                 dataGridView1.CurrentCell = dataGridView1.Rows[
                     dataGridView1.Rows.Count - 1].Cells[0];
+
             dialogResult = dataEdit.ShowDialog();
 
             if (dialogResult == DialogResult.Cancel)

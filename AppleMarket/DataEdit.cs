@@ -7,6 +7,7 @@ namespace AppleMarket
     {
         private int indexParentView = 0;
         private System.Data.DataRow myNewRow;
+        private DialogResult dialogResultNewSort;
 
         public DataEdit()
         {
@@ -75,7 +76,7 @@ namespace AppleMarket
 
             myNewRow = appleOrchardDataSet.AppleSorts.NewRow();
             myNewRow["Id"] = 0;
-            myNewRow["SortName"] = @"--новый сорт--";
+            myNewRow["SortName"] = @"--добавить новый сорт--";
             myNewRow["Taste"] = "";
             appleOrchardDataSet.AppleSorts.Rows.Add(myNewRow);
             label_Taste.Text = appleOrchardDataSet.AppleSorts.Rows[0]["Taste"].ToString();
@@ -114,7 +115,20 @@ namespace AppleMarket
                 int iId = (int)appleOrchardDataSet.AppleSorts.Rows[comboBox_Sort.SelectedIndex]["Id"];
                 if (iId == 0)
                 {
-                    MessageBox.Show(iId.ToString());
+                    NewSort newSort = new NewSort
+                    {
+                        Owner = this
+                    };
+
+                    newSort.ShowDialog();
+
+                    if (dialogResultNewSort == DialogResult.Cancel)
+                    {
+                    }
+
+                    if (dialogResultNewSort == DialogResult.OK)
+                    {
+                    }
                 }
 
                 label_Taste.Text = appleOrchardDataSet.AppleSorts.
