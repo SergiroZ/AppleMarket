@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Data;
 using System.Windows.Forms;
+
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace AppleMarket
 {
@@ -12,14 +15,17 @@ namespace AppleMarket
         public Form1()
         {
             InitializeComponent();
+            saveFileDialog1.Filter = "Excel files(*.xlsx)|*.xlsx|All files(*.*)|*.*";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            progressBar1.Visible = false;
             this.appleSortsRelativeTableAdapter.Fill(appleOrchardDataSet.AppleSortsRelative);
             // *****************************************
-            //  dataset - appleOrchardDataSet.Apples
-            //  dataadapter - applesTableAdapter
+            //  DataSet - appleOrchardDataSet.Apples
+            //          - appleOrchardDataSet.AppleSort
+            //  DataAdapter - applesTableAdapter
             // *****************************************
             this.applesTableAdapter.Fill(appleOrchardDataSet.Apples);
         }
@@ -127,6 +133,79 @@ namespace AppleMarket
                     dataGridView1.CurrentCell = id;
                 }
             }
+        }
+
+        private void buttonOut_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = saveFileDialog1.FileName;
+
+            // сохраняем данные в .exl файл
+
+            #region Export to Excel with format
+
+            progressBar1.Visible = true;
+            progressBar1.Maximum = 100;
+            progressBar1.Value = 20;
+
+            Excel.Application exApp = new Excel.Application();
+            progressBar1.Value = 50;
+            ExportToExcel(exApp, dataGridView1, "Отчет").SaveAs(filename);
+            progressBar1.Value = 100;
+            MessageBox.Show("\tВыгрузка завершена.\t");
+            progressBar1.Visible = false;
+            exApp.Quit();
+
+            #endregion Export to Excel with format
+        }
+
+        public Worksheet ExportToExcel(_Application app, DataGridView gridview, string SheetName)
+        {
+            // see the excel sheet behind the program
+            //app.Visible = true;
+            app.Workbooks.Add();
+            Worksheet worksheet = (Worksheet)app.ActiveSheet; ;
+
+            // changing the name of active sheet worksheet.
+            Name = SheetName;
+            // storing header part in Excel
+            for (int i = 1; i < gridview.Columns.Count + 1; i++)
+            {
+                var clmn = gridview.Columns[i - 1];
+                worksheet.Cells[1, i] = clmn.HeaderText;
+                worksheet.Cells[1, i].ColumnWidth = clmn.Width / 6.5;
+                //жирность
+                (worksheet.Cells[1, i] as Range).Font.Bold = true;
+                //размер шрифта
+                (worksheet.Cells[1, i] as Range).Font.Size = 11;
+                //название шрифта
+                (worksheet.Cells[1, i] as Range).Font.Name = "Times New Roman";
+                //стиль границы
+                (worksheet.Cells[1, i] as Range).Borders[(XlBordersIndex)Constants.xlTop].LineStyle = XlLineStyle.xlContinuous;
+                (worksheet.Cells[1, i] as Range).Borders[(XlBordersIndex)Constants.xlBottom].LineStyle = XlLineStyle.xlDouble;
+                (worksheet.Cells[1, i] as Range).Borders[(XlBordersIndex)Constants.xlLeft].LineStyle = XlLineStyle.xlContinuous;
+                (worksheet.Cells[1, i] as Range).Borders[(XlBordersIndex)Constants.xlRight].LineStyle = XlLineStyle.xlContinuous;
+                //толщина границы
+                (worksheet.Cells[1, i] as Range).Borders[XlBordersIndex.xlEdgeBottom].Weight = XlBorderWeight.xlMedium;
+                //выравнивание по горизонтали
+                (worksheet.Cells[1, i] as Range).HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                //выравнивание по вертикали
+                (worksheet.Cells[1, i] as Range).VerticalAlignment = XlVAlign.xlVAlignCenter;
+                //заливка ячеек
+                (worksheet.Cells[1, i] as Range).Interior.Color = System.Drawing.Color.LightGray;
+            }
+
+            // storing Each row and column value to excel sheet
+            for (int i = 0; i < gridview.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < gridview.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = gridview.Rows[i].Cells[j].Value;
+                }
+            }
+            return worksheet;
         }
     }
 }

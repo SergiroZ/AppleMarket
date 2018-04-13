@@ -46,10 +46,16 @@
             this.buttonDell = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.appleSortsRelativeTableAdapter = new AppleMarket.AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sortNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tasteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Taste = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).BeginInit();
@@ -149,6 +155,7 @@
             this.buttonOut.TabIndex = 4;
             this.buttonOut.Text = "Выгрузить";
             this.buttonOut.UseVisualStyleBackColor = false;
+            this.buttonOut.Click += new System.EventHandler(this.buttonOut_Click);
             // 
             // buttonEdit
             // 
@@ -193,6 +200,31 @@
             // 
             this.appleSortsRelativeTableAdapter.ClearBeforeFill = true;
             // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // sizeDataGridViewTextBoxColumn1
+            // 
+            this.sizeDataGridViewTextBoxColumn1.DataPropertyName = "Size";
+            this.sizeDataGridViewTextBoxColumn1.HeaderText = "Size";
+            this.sizeDataGridViewTextBoxColumn1.Name = "sizeDataGridViewTextBoxColumn1";
+            // 
+            // sortNameDataGridViewTextBoxColumn1
+            // 
+            this.sortNameDataGridViewTextBoxColumn1.DataPropertyName = "SortName";
+            this.sortNameDataGridViewTextBoxColumn1.HeaderText = "SortName";
+            this.sortNameDataGridViewTextBoxColumn1.Name = "sortNameDataGridViewTextBoxColumn1";
+            // 
+            // tasteDataGridViewTextBoxColumn1
+            // 
+            this.tasteDataGridViewTextBoxColumn1.DataPropertyName = "Taste";
+            this.tasteDataGridViewTextBoxColumn1.HeaderText = "Taste";
+            this.tasteDataGridViewTextBoxColumn1.Name = "tasteDataGridViewTextBoxColumn1";
+            // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
@@ -225,16 +257,31 @@
             // Taste
             // 
             this.Taste.DataPropertyName = "Taste";
+            this.Taste.FillWeight = 190F;
             this.Taste.HeaderText = "Вкус";
+            this.Taste.MaxInputLength = 300;
+            this.Taste.MinimumWidth = 190;
             this.Taste.Name = "Taste";
             this.Taste.ReadOnly = true;
+            this.Taste.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Taste.Width = 190;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(65, 374);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(404, 10);
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::AppleMarket.Properties.Resources.apple6;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(538, 403);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonDell);
             this.Controls.Add(this.buttonEdit);
@@ -258,7 +305,6 @@
 
         public System.Windows.Forms.DataGridView dataGridView1;
         private AppleOrchardDataSet appleOrchardDataSet;
-        private System.Windows.Forms.BindingSource applesBindingSource;
         private AppleOrchardDataSetTableAdapters.ApplesTableAdapter applesTableAdapter;
         private System.Windows.Forms.BindingSource appleOrchardDataSetBindingSource;
         private System.Windows.Forms.Button buttonOut;
@@ -266,10 +312,17 @@
         private System.Windows.Forms.Button buttonDell;
         private System.Windows.Forms.Button buttonAdd;
         private AppleOrchardDataSetTableAdapters.AppleSortsRelativeTableAdapter appleSortsRelativeTableAdapter;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.BindingSource applesBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sortNameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tasteDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private new System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Taste;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
