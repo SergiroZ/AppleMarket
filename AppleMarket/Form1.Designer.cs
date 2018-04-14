@@ -51,11 +51,11 @@
             this.sizeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sortNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tasteDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Taste = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appleOrchardDataSet)).BeginInit();
@@ -225,6 +225,14 @@
             this.tasteDataGridViewTextBoxColumn1.HeaderText = "Taste";
             this.tasteDataGridViewTextBoxColumn1.Name = "tasteDataGridViewTextBoxColumn1";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(65, 374);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(404, 10);
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Visible = false;
+            // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
@@ -265,14 +273,6 @@
             this.Taste.ReadOnly = true;
             this.Taste.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Taste.Width = 190;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(65, 374);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(404, 10);
-            this.progressBar1.TabIndex = 5;
-            this.progressBar1.Visible = false;
             // 
             // Form1
             // 
@@ -318,11 +318,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn sortNameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tasteDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn SortName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Taste;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

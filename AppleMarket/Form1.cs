@@ -21,13 +21,13 @@ namespace AppleMarket
         private void Form1_Load(object sender, EventArgs e)
         {
             progressBar1.Visible = false;
-            this.appleSortsRelativeTableAdapter.Fill(appleOrchardDataSet.AppleSortsRelative);
             // *****************************************
             //  DataSet - appleOrchardDataSet.Apples
             //          - appleOrchardDataSet.AppleSort
             //  DataAdapter - applesTableAdapter
             // *****************************************
-            this.applesTableAdapter.Fill(appleOrchardDataSet.Apples);
+            appleSortsRelativeTableAdapter.Fill(appleOrchardDataSet.AppleSortsRelative);
+            applesTableAdapter.Fill(appleOrchardDataSet.Apples);
         }
 
         private void appleOrchardDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -52,6 +52,7 @@ namespace AppleMarket
                 int keyToEdit = (int)dataGridView1.SelectedCells[0].Value;
                 int sizeToEdit = (int)dataGridView1.SelectedCells[1].Value;
 
+                //обновляем изменённые данные в главной таблице
                 appleOrchardDataSet.Apples.Rows.Find(keyToEdit).SetField("Size", sizeToEdit);
                 appleOrchardDataSet.Apples.Rows.Find(keyToEdit).SetField("SortId", CntrIndex);
                 applesTableAdapter.Update(appleOrchardDataSet.Apples);
@@ -64,6 +65,7 @@ namespace AppleMarket
             // AppleSortsRelative из appleOrchardDataSet
             DataRow row = appleOrchardDataSet.Apples.NewRow(),
                 rowrel = appleOrchardDataSet.AppleSortsRelative.NewRow();
+
             if (dataGridView1.Rows.Count != 0)
             {
                 rowrel["SortName"] = dataGridView1.Rows[
@@ -71,7 +73,6 @@ namespace AppleMarket
                 rowrel["Taste"] = dataGridView1.Rows[
                     dataGridView1.Rows.Count - 1].Cells["Taste"].Value;
             }
-
             appleOrchardDataSet.AppleSortsRelative.Rows.Add(rowrel);
 
             DataEdit dataEdit = new DataEdit
@@ -79,12 +80,14 @@ namespace AppleMarket
                 Owner = this
             };
 
+            //переносим фокус на последнюю строку
             if (dataGridView1.Rows.Count == 0)
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             else
                 dataGridView1.CurrentCell = dataGridView1.Rows[
                     dataGridView1.Rows.Count - 1].Cells[0];
 
+            //работаем с формой dataEdit
             dialogResult = dataEdit.ShowDialog();
 
             if (dialogResult == DialogResult.Cancel)
@@ -103,6 +106,7 @@ namespace AppleMarket
                 this.appleSortsRelativeTableAdapter.Fill(appleOrchardDataSet.AppleSortsRelative);
             }
 
+            //фокус на последнюю строку
             if (dataGridView1.RowCount > 0)
             {
                 int ind = dataGridView1.RowCount - 1;
@@ -123,8 +127,8 @@ namespace AppleMarket
                 dataGridView1.Rows.RemoveAt(indexToDell);
                 applesTableAdapter.Update(appleOrchardDataSet.Apples);
 
+                //фокус на предыдущую строку
                 if (--indexToDell < 0) indexToDell = 0;
-
                 if (dataGridView1.RowCount > 0)
                 {
                     dataGridView1.ClearSelection();
@@ -152,7 +156,7 @@ namespace AppleMarket
 
             Excel.Application exApp = new Excel.Application();
             progressBar1.Value = 50;
-            ExportToExcel(exApp, dataGridView1, "Отчет").SaveAs(filename);
+            ExportToExcel(exApp, dataGridView1).SaveAs(filename);
             progressBar1.Value = 100;
             MessageBox.Show("\tВыгрузка завершена.\t");
             progressBar1.Visible = false;
@@ -161,16 +165,13 @@ namespace AppleMarket
             #endregion Export to Excel with format
         }
 
-        public Worksheet ExportToExcel(_Application app, DataGridView gridview, string SheetName)
+        private Worksheet ExportToExcel(_Application app, DataGridView gridview)
         {
-            // see the excel sheet behind the program
             //app.Visible = true;
             app.Workbooks.Add();
             Worksheet worksheet = (Worksheet)app.ActiveSheet; ;
 
-            // changing the name of active sheet worksheet.
-            Name = SheetName;
-            // storing header part in Excel
+            // сохранение заголовка в Excel
             for (int i = 1; i < gridview.Columns.Count + 1; i++)
             {
                 var clmn = gridview.Columns[i - 1];
@@ -197,7 +198,7 @@ namespace AppleMarket
                 (worksheet.Cells[1, i] as Range).Interior.Color = System.Drawing.Color.LightGray;
             }
 
-            // storing Each row and column value to excel sheet
+            // Сохранение значение строки и столбца для листа Excel
             for (int i = 0; i < gridview.Rows.Count - 1; i++)
             {
                 for (int j = 0; j < gridview.Columns.Count; j++)
@@ -205,6 +206,7 @@ namespace AppleMarket
                     worksheet.Cells[i + 2, j + 1] = gridview.Rows[i].Cells[j].Value;
                 }
             }
+
             return worksheet;
         }
     }
